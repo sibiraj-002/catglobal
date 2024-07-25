@@ -450,7 +450,7 @@ button.slick-arrow.slick-next.slick-arrow.slick-next {
 }
 .fp-constituents .fp-constituents-single {
   /* width: 23.5%; */
-  height: 150px;
+  height: 170px;
   font-size: 14px;
   max-width: 282px;
   line-height: 24px;
@@ -582,6 +582,7 @@ button.slick-arrow.slick-next.slick-arrow.slick-next {
   margin: 0 auto;
   padding: 0 83px;
   max-width: 1366px;
+  
 }
 .main-footer p {
   display: inline-block;
@@ -920,6 +921,10 @@ button.slick-arrow.slick-next.slick-arrow.slick-next {
    width:100% !important; 
   }
   
+  .main-footer {
+
+    height: 80px;
+  }
 
   
   .container {

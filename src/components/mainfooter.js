@@ -19,7 +19,7 @@ export class Mainfooter extends Component {
             <div className="d-block d-lg-none main-footer">
                 <Container>
                     <p>
-                        &copy; {(new Date().getFullYear())} Catalysts Foundation <br /> All Rights Reserved | Terms &amp; Conditions | Disclaimer
+                        &copy; {(new Date().getFullYear())} Catalysts Foundation <br />All Rights Reserved | Terms &amp; Conditions | Disclaimer
                     </p>
                 </Container>
             </div>
