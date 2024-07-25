@@ -3,17 +3,10 @@ import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import logo from '../../img/catalyst-global-logo.svg';
 import {
-  Nav,
-  NavLink,
-  Bars,
-  NavMenu,
-  NavBtn,
-  NavBtnLink,
   OffCanvas,
   OffCanvasContent,
   CloseButton
 } from './NavbarElements';
-
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -39,160 +32,161 @@ const Navbar = () => {
     };
   }, []);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    const handleRouteChange = () => {
+      window.scrollTo(0, 0);
+    };
+    handleRouteChange(); // Call on initial load
+    window.addEventListener('popstate', handleRouteChange); // Listen to browser navigation
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
+
   return (
     <>
-    <style>
-      {
-        `
-      /* Navbar.css */
+      <style>
+        {`
+          /* Navbar.css */
+          .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center all items */
+            padding: 10px 20px;
+            background-color: transparent;
+            transition: background-color 0.3s ease;
+          }
 
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center all items */
-    padding: 10px 20px;
-    background-color: transparent;
-    transition: background-color 0.3s ease;
-}
+          .colorChange {
+            background-color: rgba(0, 0, 0, 0.7);
+          }
 
-.colorChange {
-    background-color: rgba(0, 0, 0, 0.7);
-}
+          .nav-container {
+            display: flex;
+            align-items: center;
+            width: auto; /* Adjust width to auto */
+            justify-content: center; /* Center all items */
+            position: relative;
+          }
 
-.nav-container {
-    display: flex;
-    align-items: center;
-    width: auto; /* Adjust width to auto */
-    justify-content: center; /* Center all items */
-    position: relative;
-}
+          .nav-logo {
+            width: 150px;
+          }
 
-.nav-logo {
-    width: 150px;
-}
+          .menu-icon, .close-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+          }
 
-.menu-icon, .close-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: none;
-    margin:0;
-    color:white
-}
+          .menu-icon {
+            display: none;
+            position: absolute;
+            right: -90px; /* Position the menu icon to the right */
+          }
 
-.nav-menu {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    margin-left: 20px; /* Add margin to create space between logo and menu */
-}
+          .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            margin-left: 20px; /* Add margin to create space between logo and menu */
+          }
 
-.nav-item {
-    margin-left: 20px;
-}
+          .nav-item {
+            margin-left: 20px;
+          }
 
-.nav-link {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-}
+          .nav-link {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+          }
 
-.nav-link:hover {
-    color: red;
-}
+          .nav-link:hover {
+            color: red;
+          }
 
-.nav-btn {
-    background-color: #e74c3c;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: #fff;
-    text-decoration: none;
-    margin-left: auto;
-    transition: background-color 0.3s ease;
-}
+          .nav-btn {
+            background-color: #e74c3c;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            margin-left: auto;
+            transition: background-color 0.3s ease;
+          }
 
-.nav-btn:hover {
-    background-color: #c0392b;
-}
-.menu-icon {
-    position: absolute;
-    right: -90px; /* Position the menu icon to the right */
-}
-.offcanvas {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100%;
-    background-color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-    transition: transform 0.3s ease;
-    transform: translateX(100%);
-}
+          .nav-btn:hover {
+            background-color: #c0392b;
+          }
 
-.offcanvas.show {
-    transform: translateX(0);
-}
+          @media (max-width: 768px) {
+            .menu-icon {
+              display: block;
+            }
 
-.close-icon {
-    align-self: flex-end;
-}
+            .nav-container {
+              justify-content: space-between; /* Align items to the start and end */
+            }
 
-.offcanvas-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
+            .nav-menu {
+              display: none;
+            }
 
-.offcanvas-link {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
+            .nav-btn {
+              display: none;
+            }
+          }
 
-.offcanvas-link:hover {
-    color: #f1c40f;
-}
+          .offcanvas {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            transform: translateX(100%);
+          }
 
-@media (max-width: 768px) {
-    .menu-icon {
-      display: block;
+          .offcanvas.show {
+            transform: translateX(0);
+          }
 
-    }
-      .menu.icon{
-        align-content: start;
-        justify-content: start;
-        align-items: start;
-        }
+          .close-icon {
+            align-self: flex-end;
+          }
 
-         .nav-container {
-        justify-content: space-between; /* Align items to the start and end */
-    }
+          .offcanvas-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+          }
 
-    .nav-menu {
-      display: none;
-    }
+          .offcanvas-link {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+          }
 
-    .nav-btn {
-      display: none;
-    }
-}
-
-  
-        `
-      }
+          .offcanvas-link:hover {
+            color: #f1c40f;
+          }
+        `}
       </style>
       <nav className={navbar ? 'navbar colorChange' : 'navbar'}>
-
         <div className="nav-container">
-         <FaBars onClick={toggleOffCanvas} className="menu-icon " />
+          <FaBars onClick={toggleOffCanvas} className="menu-icon" />
 
           <a href="/">
-            <img src={logo} alt="Catalyst Global Logo" className="nav-logo ju" />
+            <img src={logo} alt="Catalyst Global Logo" className="nav-logo" />
           </a>
           <ul className="nav-menu mt-4">
             <li className="nav-item text-red px-3">
@@ -214,25 +208,20 @@ const Navbar = () => {
       </nav>
 
       {showOffCanvas && (
-        <>
-       
-        <OffCanvas>
-          
-          <CloseButton onClick={toggleOffCanvas}>
+        <OffCanvas className="offcanvas show">
+          <CloseButton onClick={toggleOffCanvas} className="close-icon">
             <FaTimes />
           </CloseButton>
           <OffCanvasContent>
-            <NavLink to="/" onClick={toggleOffCanvas}>Home</NavLink>
-            <NavLink to="/organisations" onClick={toggleOffCanvas}>Organisations</NavLink>
-            <NavLink to="/partners" onClick={toggleOffCanvas}>Partners</NavLink>
-            <NavLink to="https://communityactioncollab.org" target="_blank" onClick={toggleOffCanvas}>
+            <Link to="/" onClick={toggleOffCanvas} className="offcanvas-link">Home</Link>
+            <Link to="/organisations" onClick={toggleOffCanvas} className="offcanvas-link">Organisations</Link>
+            <Link to="/partners" onClick={toggleOffCanvas} className="offcanvas-link">Partners</Link>
+            <a href="https://communityactioncollab.org" target="_blank" rel="noopener noreferrer" onClick={toggleOffCanvas} className="offcanvas-link">
               Community Action Collab
-            </NavLink>
+            </a>
           </OffCanvasContent>
         </OffCanvas>
-        </>
-      )
-      }
+      )}
     </>
   );
 };

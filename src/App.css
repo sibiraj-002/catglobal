@@ -597,7 +597,8 @@ button.slick-arrow.slick-next.slick-arrow.slick-next {
 .partner-body .container {
   width: 100%;
   margin: 0 auto;
-  padding: 0 83px;
+  /* padding: 0 83px; */
+  padding: 10px;
   max-width: 1366px;
 }
 .partner-body .partner-title {
@@ -913,6 +914,9 @@ button.slick-arrow.slick-next.slick-arrow.slick-next {
 /* Overview page CSS ends */
 
 @media (max-width: 576px) { 
+
+
+  
   .flex-row-wrap{
     display: flex ;
     flex-direction: column ;
@@ -925,8 +929,6 @@ button.slick-arrow.slick-next.slick-arrow.slick-next {
 
     height: 80px;
   }
-
-  
   .container {
     padding: 0px;
   }
